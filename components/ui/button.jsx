@@ -18,6 +18,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        gold: "relative overflow-hidden bg-gradient-to-br from-yellow-400 via-amber-400 to-yellow-500 text-yellow-950 font-semibold shadow-md shadow-amber-200/50 border border-yellow-300 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700 hover:shadow-amber-300/60 hover:shadow-lg hover:scale-[1.02] hover:brightness-105 active:scale-[0.98] transition-all duration-300",
       },
       size: {
         default:
@@ -31,6 +32,7 @@ const buttonVariants = cva(
         "icon-sm":
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
+        hero : "px-6 sm:px-8 py-2 sm:py-3.5 text-base rounded-xl"
       },
     },
     defaultVariants: {
