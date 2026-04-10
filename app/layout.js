@@ -30,6 +30,9 @@ export default function RootLayout({ children }) {
     <body className={`${lora.variable} ${dmSans.variable} font-sans`}>
       <Header />
       <main className="min-h-screen">{children}</main>
+      <footer className="relative z-10 border-t border-white/7 py-12  mx-auto px-6 flex flex-wrap items-center justify-center text-stone-400">
+              Made with ❤️ by Rajdeep Singh
+            </footer>
     </body>
   </html>
 </ClerkProvider>
