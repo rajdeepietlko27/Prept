@@ -289,7 +289,17 @@ export default function Home() {
             Each credit = one session. Unused credits roll over.
           </p>
         </div>
-        <PricingTable/>
+        <PricingTable 
+         checkoutProps={{
+          appearance:{
+            elements : { 
+              drawerRoot : {
+                 zIndex : 2000 ,
+              }
+            }
+          }
+         }}
+        />
        </section>
 
          
