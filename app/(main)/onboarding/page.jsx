@@ -227,7 +227,7 @@ export default function OnboardingPage() {
                 ? "Setting up your account…"
                 : role === "INTERVIEWER"
                   ? "Create interviewer profile →"
-                  : "Go to dashboard →"}
+                  : "Explore Interviwers →"}
             </Button>
           </div>
         )}
