@@ -17,7 +17,7 @@ import {
 } from "@/lib/helpers";
 import { GrayTitle } from "@/components/ui/reusable";
 
-const SLOT_DURATION_MINUTES = 45;
+const SLOT_DURATION_MINUTES = 60;
 const DAYS_AHEAD = 7;
 
 export default function SlotPicker({
