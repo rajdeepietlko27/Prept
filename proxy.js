@@ -34,31 +34,6 @@ export default clerkMiddleware(async (auth, req) => {
     await auth.protect();
   }
 
-  const { userId } = await auth();
-  const path = req.nextUrl.pathname;
-
-  if (userId) {
-    const { db } = await import("@/lib/prisma");
-    const user = await db.user.findUnique({
-      where: { clerkUserId: userId },
-      select: { role: true },
-    });
-
-    const onOnboarding = path.startsWith("/onboarding");
-
-    // No role → send to onboarding
-    if (!user?.role && !onOnboarding) {
-      return NextResponse.redirect(new URL("/onboarding", req.url));
-    }
-
-    // Already onboarded → don't let them back to onboarding
-    if (user?.role && onOnboarding) {
-      return NextResponse.redirect(
-        new URL(user.role === "INTERVIEWER" ? "/dashboard" : "/explore", req.url)
-      );
-    }
-  }
-
   return NextResponse.next();
 });
 

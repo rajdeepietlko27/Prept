@@ -14,10 +14,12 @@ import EarningsSection from "./_components/EarningsSection";
 import { ClipboardList, Clock, Wallet } from "lucide-react";
 import { getCurrentUser } from "@/actions/user";
 import PageHeader from "@/components/ui/reusable";
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/actions/user";
 
 export default async function InterviewerDashboardPage() {
-  const user = await currentUser();
-  if (!user) redirect("/");
+  const user = await getCurrentUser();
+if (!user?.role) redirect("/onboarding");
 
   const dbUser = await getCurrentUser();
 

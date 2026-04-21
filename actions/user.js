@@ -7,14 +7,24 @@ export const getCurrentUser = async () => {
   const user = await currentUser();
   if (!user) return null;
 
-  return db.user.findUnique({
-    where: { clerkUserId: user.id },
-    select: {
-      role: true,
-      name: true,
-      title: true,
-      company: true,
-      imageUrl: true,
-    },
-  });
+  // Retry up to 3 times with delay to handle post-onboarding timing
+  for (let i = 0; i < 3; i++) {
+    const dbUser = await db.user.findUnique({
+      where: { clerkUserId: user.id },
+      select: {
+        role: true,
+        name: true,
+        title: true,
+        company: true,
+        imageUrl: true,
+      },
+    });
+
+    if (dbUser?.role) return dbUser;
+
+    // Wait 500ms before retrying
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+
+  return null;
 };

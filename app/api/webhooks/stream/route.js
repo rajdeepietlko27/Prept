@@ -241,7 +241,7 @@ Analyze the candidate's performance. Respond ONLY with a valid JSON object, no m
       } else {
         console.log(
           `[stream-webhook] Earning transaction already exists, skipping`
-        );
+        );c
       }
 
       console.log(`[stream-webhook] ✓ All done for booking ${booking.id}`);
