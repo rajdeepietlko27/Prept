@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { GrayTitle } from "@/components/reusables";
+
 import { approvePayout } from "@/actions/payout";
 import useFetch from "@/hooks/use-fetch";
+import { GrayTitle } from "@/components/ui/reusable";
 
 export default function PayoutReviewClient({ payout }) {
   const [password, setPassword] = useState("");
