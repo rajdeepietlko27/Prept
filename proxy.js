@@ -1,4 +1,3 @@
-
 import arcjet, { detectBot, shield } from "@arcjet/next";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
@@ -10,6 +9,7 @@ const isProtectedRoute = createRouteMatcher([
   "/onboarding(.*)",
 ]);
 
+const isWebhookRoute = createRouteMatcher(["/api/webhooks/stream(.*)"]);
 const aj = arcjet({
   key: process.env.ARCJET_KEY,
   rules: [
@@ -21,14 +21,13 @@ const aj = arcjet({
   ],
 });
 
-
 export default clerkMiddleware(async (auth, req) => {
-
-  const decision = await aj.protect(req);
+  if (!isWebhookRoute(req)) {
+    const decision = await aj.protect(req);
     if (decision.isDenied()) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
-
+  }
 
   if (isProtectedRoute(req)) {
     await auth.protect();

@@ -14,7 +14,6 @@ import {
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 // Stream Chat
-// AFTER
 import {
   Chat,
   Channel,
@@ -27,10 +26,34 @@ import "stream-chat-react/dist/css/index.css";
 import { Badge } from "@/components/ui/badge";
 import { MessageSquare, Sparkles, Loader2 } from "lucide-react";
 import AIQuestionsPanel from "./AIQuestionsPanel";
-// import AIQuestionsPanel from "./AIQuestions";
+
+// ─── Custom Message Input ─────────────────────────────────────────────────────
+function CustomMessageInput({ channel }) {
+  const [text, setText] = useState("");
+
+  const handleSubmit = async () => {
+    if (!text.trim()) return;
+    await channel.sendMessage({ text });
+    setText("");
+  };
+
+  return (
+    <div className="flex gap-2 p-2 border-t border-white/10">
+      <input
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+        placeholder="Send a message..."
+        className="flex-1 bg-white/5 text-white text-sm rounded px-3 py-2 outline-none"
+      />
+      <button onClick={handleSubmit} className="text-amber-400 text-sm px-3">
+        Send
+      </button>
+    </div>
+  );
+}
 
 // ─── Call UI (inside StreamCall context) ─────────────────────────────────────
-
 export default function CallUI({
   callId,
   isInterviewer,
@@ -61,7 +84,7 @@ export default function CallUI({
     }
   }, [call, onLeave]);
 
-  // ── Chat client — same token works for both Video + Chat SDKs ──
+  // ── Chat client ──
   const chatClient = useCreateChatClient({
     apiKey,
     tokenOrProvider: token,
@@ -154,7 +177,6 @@ export default function CallUI({
               Chat
             </button>
 
-            {/* AI Questions tab — interviewer only */}
             {isInterviewer && (
               <button
                 type="button"
@@ -172,14 +194,14 @@ export default function CallUI({
           </div>
 
           {/* Panel content */}
-          <div className="flex-1 min-h-0 overflow-hidden">
+          <div className="flex-1 min-h-0 overflow-hidden flex flex-col">
             {activeTab === "chat" ? (
               chatClient && chatChannel ? (
                 <Chat client={chatClient} theme="str-chat__theme-dark">
                   <Channel channel={chatChannel}>
                     <Window>
                       <MessageList />
-                   
+                      <CustomMessageInput channel={chatChannel} />
                     </Window>
                   </Channel>
                 </Chat>
