@@ -8,12 +8,12 @@ import { ClipboardList } from "lucide-react";
 
 export default function AppointmentsSection({ appointments }) {
   const now = new Date();
-  const scheduled = appointments.filter(
-    (a) => a.status === "SCHEDULED" && new Date(a.startTime) > now,
-  );
-  const past = appointments.filter(
-    (a) => a.status !== "SCHEDULED" || new Date(a.endTime) <= now,
-  );
+  const scheduled = appointments
+  .filter((a) => a.status === "SCHEDULED" && new Date(a.startTime) > now)
+  .sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+  const past = appointments
+  .filter((a) => a.status !== "SCHEDULED" || new Date(a.endTime) <= now)
+  .sort((a, b) => new Date(b.startTime) - new Date(a.startTime)); 
 
   return (
     <section className="flex flex-col gap-6">
