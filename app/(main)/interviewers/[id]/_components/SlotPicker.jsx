@@ -132,7 +132,7 @@ export default function SlotPicker({
           </div>
 
           {/* Date tabs */}
-          <div className="flex gap-2 overflow-x-auto pb-0.5 scrollbar-none -mx-1 px-1">
+        <div className="flex gap-2 overflow-x-auto pb-3 -mx-1 px-1 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-amber-400/60 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-amber-400">
             {dates.map((date) => {
               const label = formatDateTab(date);
               const active =

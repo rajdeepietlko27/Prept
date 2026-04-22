@@ -252,34 +252,32 @@ export default function Home() {
                 {role.label}
               </span>
 
-                
-                <h3 className="font-serif text-2xl tracking-tight mb-4"  > 
-                 {role.title}
-                </h3>
+              <h3 className="font-serif text-2xl tracking-tight mb-4">
+                {role.title}
+              </h3>
 
-                <p className="text-sm text-stone-400 leading-relaxed mb-8" >
-                    {role.desc}
-                </p>
+              <p className="text-sm text-stone-400 leading-relaxed mb-8">
+                {role.desc}
+              </p>
 
-                <ul className="space-y-3" >
-                  {role.perks.map((p)=>(
-                    <li key={p} className="flex gap-3 text-sm text-stone-400" >
-                   <span className="mt-0.5 min-w-4 h-4 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-xs text-amber-400">
+              <ul className="space-y-3">
+                {role.perks.map((p) => (
+                  <li key={p} className="flex gap-3 text-sm text-stone-400">
+                    <span className="mt-0.5 min-w-4 h-4 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-xs text-amber-400">
                       ✓
                     </span>
                     {p}
-                    </li>
-                  ))}
-                </ul>
-
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
       </section>
 
       {/* // pricing */}
-       <section className="relative z-10 pb-28 maz-w-5xl mx-auto px-6" >
-         <div className="text-center mb-16">
+      <section className="relative z-10 pb-28 maz-w-5xl mx-auto px-6">
+        <div className="text-center mb-16">
           <SectionLabel>Pricing</SectionLabel>
           <SectionHeading
             gray="Simple, transparent"
@@ -289,21 +287,43 @@ export default function Home() {
             Each credit = one session. Unused credits roll over.
           </p>
         </div>
-        <PricingTable 
-         checkoutProps={{
-          appearance:{
-            elements : { 
-              drawerRoot : {
-                 zIndex : 2000 ,
-              }
-            }
-          }
-         }}
+        <PricingTable
+          appearance={{
+            variables: {
+              colorBackground: "#141416",
+              colorText: "#e7e5e4",
+              colorTextSecondary: "#78716c",
+              colorPrimary: "#f59e0b",
+              colorDanger: "#ef4444",
+              borderRadius: "0.75rem",
+              fontFamily: "inherit",
+            },
+            elements: {
+              pricingTableCard:
+                "bg-[#1a1a1d] border border-white/10 rounded-xl hover:border-amber-400/30 transition-all duration-200",
+              pricingTableCardTitle: "text-white font-semibold",
+              pricingTableCardPrice: "text-amber-400",
+              pricingTableCardFeatureText: "text-stone-400",
+              pricingTableCardFeatureIcon: "text-amber-400",
+              badge:
+                "bg-amber-400/15 text-amber-400 border border-amber-400/30 text-xs",
+              formButtonPrimary:
+                "bg-amber-400 hover:bg-amber-300 text-black font-semibold rounded-xl transition-all duration-200",
+            },
+          }}
+          checkoutProps={{
+            appearance: {
+              elements: {
+                drawerRoot: {
+                  zIndex: 2000,
+                },
+              },
+            },
+          }}
         />
-       </section>
+      </section>
 
-         
-         <section className="relative z-10 pb-28 max-w-5xl mx-auto px-6">
+      <section className="relative z-10 pb-28 max-w-5xl mx-auto px-6">
         <div className="relative border border-amber-400/20 rounded-3xl px-3 sm:px-16 py-20 bg-linear-to-br from-amber-400/5 text-center overflow-hidden">
           <StarsBackgrounds />
 
@@ -332,7 +352,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

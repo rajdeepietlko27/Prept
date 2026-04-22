@@ -30,7 +30,6 @@ export default function CallRoom({
   const joinedRef = useRef(false);
 
   useEffect(() => {
-    // Guard against React StrictMode double-invoke in development
     if (joinedRef.current) return;
     joinedRef.current = true;
 
@@ -48,7 +47,22 @@ export default function CallRoom({
 
     callInstance
       .join({ create: false })
-      .then(() => {
+      .then(async () => {
+        // Only interviewer starts recording + transcription
+        if (isInterviewer) {
+          try {
+            await callInstance.startTranscription();
+          } catch (e) {
+            console.error("Transcription start failed:", e);
+          }
+
+          try {
+            await callInstance.startRecording();
+          } catch (e) {
+            console.error("Recording start failed:", e);
+          }
+        }
+
         clientRef.current = client;
         setVideoClient(client);
         setCall(callInstance);
@@ -59,7 +73,7 @@ export default function CallRoom({
       callInstance.leave().catch(() => {});
       client.disconnectUser().catch(() => {});
       clientRef.current = null;
-      joinedRef.current = false; // reset so hot reload works
+      joinedRef.current = false;
     };
   }, [
     apiKey,
@@ -68,6 +82,7 @@ export default function CallRoom({
     currentUser.imageUrl,
     currentUser.name,
     token,
+    isInterviewer,
   ]);
 
   const handleLeave = useCallback(() => {
@@ -98,4 +113,4 @@ export default function CallRoom({
       </StreamCall>
     </StreamVideo>
   );
-} 
+}
