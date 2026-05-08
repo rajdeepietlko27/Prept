@@ -85,5 +85,4 @@ Deployed on Vercel. Connect your GitHub repo and add environment variables in th
 Author
 Rajdeep Singh
 
-GitHub: (https://github.com/rajdeepietlko27)
-LinkedIn: (https://www.linkedin.com/in/rajdeep-singh-615157282/)
+GitHub: @rajdeepietlko27
